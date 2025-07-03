@@ -14,8 +14,8 @@ public class StringCalculator {
         if(numbers == null || numbers.isEmpty())
             return 0;
 
-        if(numbers.contains(","))
-            return sumNumbers(numbers.split(","));
+        if(numbers.contains(",") || numbers.contains("\n"))
+            return sumNumbers(numbers.split("[,\\n]"));
 
         return Integer.parseInt(numbers);
     }
