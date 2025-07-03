@@ -46,4 +46,15 @@ class StringCalculatorTest {
         assertEquals(6, stringCalculator.add("1\n2\n3"));
 
     }
+
+    //4. Support different delimiters:
+    //To change the delimiter, the beginning of the string will contain a separate line that looks like this: "//[delimiter]\n[numbers…]".
+    // For example, "//;\n1;2" where the delimiter is ";" should return 3.
+    @Test
+    void allow_different_delimiters() {
+        assertEquals(3, stringCalculator.add("//;\n1;2"));
+        assertEquals(3, stringCalculator.add("//.\n1.2.0"));
+        assertEquals(6, stringCalculator.add("//}\n1\n2}3"));
+        assertEquals(5, stringCalculator.add("//$\n2$3"));
+    }
 }
