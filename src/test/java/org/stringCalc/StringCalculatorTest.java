@@ -15,5 +15,9 @@ class StringCalculatorTest {
     void return_0_on_empty_string() {
         assertEquals(0, stringCalculator.add(""));
     }
+    @Test
+    void return_number_on_single_number_string() {
+        assertEquals(4, stringCalculator.add("4"));
+    }
 
 }
