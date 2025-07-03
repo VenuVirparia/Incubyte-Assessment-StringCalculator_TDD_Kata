@@ -32,8 +32,8 @@ class StringCalculatorTest {
     //2. Allow the add method to handle any amount of numbers
     @Test
     void return_sum_of_all_numbers_in_string() {
-        assertEquals(12,stringCalculator("8,1,3"));
-        assertEquals(15,stringCalculator("5,6,2,2"));
+        assertEquals(12,stringCalculator.add("8,1,3"));
+        assertEquals(15,stringCalculator.add("5,6,2,2"));
 
     }
 }
