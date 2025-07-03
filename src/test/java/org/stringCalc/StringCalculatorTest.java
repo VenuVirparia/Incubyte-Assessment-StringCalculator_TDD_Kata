@@ -43,6 +43,7 @@ class StringCalculatorTest {
     void allow_newline_as_delimiter() {
         assertEquals(6, stringCalculator.add("1\n2,3"));
         assertEquals(6, stringCalculator.add("1,2\n3"));
+        assertEquals(6, stringCalculator.add("1\n2\n3"));
 
     }
 }
