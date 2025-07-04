@@ -3,6 +3,7 @@ package org.stringCalc;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringCalculatorTest {
 
@@ -56,5 +57,15 @@ class StringCalculatorTest {
         assertEquals(3, stringCalculator.add("//.\n1.2.0"));
         assertEquals(6, stringCalculator.add("//}\n1\n2}3"));
         assertEquals(5, stringCalculator.add("//$\n2$3"));
+    }
+
+    //5. Calling add with a negative number will throw an exception:
+    // "negative numbers not allowed <negative_number>".
+    @Test
+    void throw_exception_on_negative_number() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.add("-1");
+        });
+        assertEquals("negative numbers not allowed: -1", exception.getMessage());
     }
 }
