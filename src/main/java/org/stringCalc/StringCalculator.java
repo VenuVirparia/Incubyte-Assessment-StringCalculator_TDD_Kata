@@ -12,26 +12,35 @@ public class StringCalculator {
         return sum;
     }
 
-    private Character checkDelimiter(String numbers){
+    private Character getCustomDelimiterIfExists(String numbers){
         if(numbers.startsWith("//"))
             return numbers.charAt(2);
         return null;
+    }
+
+    String extractNumberSection(String numbers)
+    {
+        return numbers.substring(numbers.indexOf("\n")+1);
+    }
+
+    String buildRegex(Character delimiter){
+        return "[,\n]" + "|" + Pattern.quote(String.valueOf(delimiter));
     }
 
     public int add(String numbers) {
         if(numbers == null || numbers.isEmpty())
             return 0;
 
-        Character delimiter = checkDelimiter(numbers);
+        Character delimiter = getCustomDelimiterIfExists(numbers);
         if(delimiter != null){
-            numbers = numbers.substring(numbers.indexOf("\n")+1);
-            return sumNumbers(numbers.split("[,\n]" + "|" + Pattern.quote(delimiter+""))
-            );
+            numbers = extractNumberSection(numbers);
+            String regex = buildRegex(delimiter);
+            return sumNumbers(numbers.split(regex));
         }
 
         if(numbers.contains(",") || numbers.contains("\n"))
             return sumNumbers(numbers.split("[,\\n]"));
 
-        return Integer.parseInt(numbers);
+       return Integer.parseInt(numbers);
     }
 }
