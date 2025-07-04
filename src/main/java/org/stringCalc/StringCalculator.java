@@ -13,6 +13,7 @@ public class StringCalculator {
             int currentNumber = Integer.parseInt(number);
             if (currentNumber < 0)
                 negativeNumbers.add(currentNumber+"");
+            if (currentNumber > 1000) continue;
             sum += currentNumber;
         }
         if (!negativeNumbers.isEmpty())
