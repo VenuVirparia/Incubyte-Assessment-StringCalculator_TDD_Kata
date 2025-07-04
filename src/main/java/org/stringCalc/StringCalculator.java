@@ -4,10 +4,12 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private int sumNumbers(String[] numberArray) {
+    private int sumNumbers(String[] numberArray) throws IllegalArgumentException {
         int sum = 0;
         for (String number : numberArray) {
-            sum += Integer.parseInt(number);
+            int currentNumber = Integer.parseInt(number);
+            if (currentNumber < 0) throw new IllegalArgumentException("negative numbers not allowed: "+currentNumber);
+            sum += currentNumber;
         }
         return sum;
     }
@@ -38,9 +40,6 @@ public class StringCalculator {
             return sumNumbers(numbers.split(regex));
         }
 
-        if(numbers.contains(",") || numbers.contains("\n"))
-            return sumNumbers(numbers.split("[,\\n]"));
-
-       return Integer.parseInt(numbers);
+        return sumNumbers(numbers.split("[,\\n]"));
     }
 }
