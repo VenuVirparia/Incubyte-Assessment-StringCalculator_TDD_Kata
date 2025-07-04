@@ -1,16 +1,22 @@
 package org.stringCalc;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
 
     private int sumNumbers(String[] numberArray) throws IllegalArgumentException {
         int sum = 0;
+        List<String> negativeNumbers = new ArrayList<>();
         for (String number : numberArray) {
             int currentNumber = Integer.parseInt(number);
-            if (currentNumber < 0) throw new IllegalArgumentException("negative numbers not allowed: "+currentNumber);
+            if (currentNumber < 0)
+                negativeNumbers.add(currentNumber+"");
             sum += currentNumber;
         }
+        if (!negativeNumbers.isEmpty())
+            throw new IllegalArgumentException("negative numbers not allowed: " + String.join(",",negativeNumbers));
         return sum;
     }
 
