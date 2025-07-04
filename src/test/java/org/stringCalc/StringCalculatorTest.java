@@ -77,10 +77,10 @@ class StringCalculatorTest {
     //6. Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
     @Test
     void ignoring_number_greater_than_1000() {
-        assertEquals(5, stringCalculator.add("1000,2,3"));
+        assertEquals(5, stringCalculator.add("1001,2,3"));
         assertEquals(1003, stringCalculator.add("999\n1,3"));
-        assertEquals(4, stringCalculator.add("1000\n2,2"));
-        assertEquals(3, stringCalculator.add("\\;\n1000;2,1"));
-        assertEquals(2, stringCalculator.add("\\$\n1000\n1$1"));
+        assertEquals(4, stringCalculator.add("1001\n2,2"));
+        assertEquals(3, stringCalculator.add("//;\n1001;2,1"));
+        assertEquals(2, stringCalculator.add("//$\n1001\n1$1"));
     }
 }
