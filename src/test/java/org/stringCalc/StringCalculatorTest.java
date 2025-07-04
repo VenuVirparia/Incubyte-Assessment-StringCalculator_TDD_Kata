@@ -63,9 +63,16 @@ class StringCalculatorTest {
     // "negative numbers not allowed <negative_number>".
     @Test
     void throw_exception_on_negative_number() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception1 = assertThrows(IllegalArgumentException.class, () -> {
             stringCalculator.add("-1");
         });
-        assertEquals("negative numbers not allowed: -1", exception.getMessage());
+        assertEquals("negative numbers not allowed: -1", exception1.getMessage());
+
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.add("1,-2,-5");
+        });
+        assertEquals("negative numbers not allowed: -2,-5", exception2.getMessage());
+
+
     }
 }
