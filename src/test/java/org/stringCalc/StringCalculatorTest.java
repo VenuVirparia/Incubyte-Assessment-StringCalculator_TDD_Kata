@@ -93,4 +93,13 @@ class StringCalculatorTest {
         assertEquals(10,stringCalculator.add("//[##]\n1\n2##3,4"));
         assertEquals(5,stringCalculator.add("//[>>]\n0>>2\n3"));
     }
+
+    //8. Allow multiple delimiters like this:
+    // “//[delim1][delim2]\n” for example “//[*][%]\n1*2%3” should return 6.
+    @Test
+    void allow_multiple_delimiters(){
+        assertEquals(6, stringCalculator.add("//[*][%]\n1*2%3"));
+        assertEquals(10, stringCalculator.add("//[+][@]\n1+2@3+4"));
+        assertEquals(20, stringCalculator.add("//[+][@]\n1+2@3+4,2\n8"));
+    }
 }
