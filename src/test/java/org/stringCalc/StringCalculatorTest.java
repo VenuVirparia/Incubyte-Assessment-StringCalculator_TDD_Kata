@@ -88,9 +88,9 @@ class StringCalculatorTest {
     // “//[delimiter]\n” for example: “//[***]\n1***2***3” should return 6
     @Test
     void allow_variable_length_delimiters(){
-        assertEquals(6,stringCalculator.add("//[***]\\n1***2***3"));
-        assertEquals(3,stringCalculator.add("//[$$$]\\n1$$$2$$$0"));
-        assertEquals(10,stringCalculator.add("//[##]\\n1\n2##3,4"));
-        assertEquals(5,stringCalculator.add("//[>>]\\n0>>2\n3"));
+        assertEquals(6,stringCalculator.add("//[***]\n1***2***3"));
+        assertEquals(3,stringCalculator.add("//[$$$]\n1$$$2$$$0"));
+        assertEquals(10,stringCalculator.add("//[##]\n1\n2##3,4"));
+        assertEquals(5,stringCalculator.add("//[>>]\n0>>2\n3"));
     }
 }
