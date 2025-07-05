@@ -60,12 +60,12 @@ To clone and run the project:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/StringCalculator.git
+   git clone https://github.com/VenuVirparia/Incubyte-Assessment-StringCalculator_TDD_Kata.git
    ```
 2. Navigate into the project directory:
 
    ```bash
-   cd StringCalculator
+   cd Incubyte-Assessment-StringCalculator_TDD_Kata
    ```
 3. Run the tests using Maven or your preferred IDE.
 
