@@ -21,9 +21,11 @@ public class StringCalculator {
         return sum;
     }
 
-    private Character getCustomDelimiterIfExists(String numbers){
-        if(numbers.startsWith("//"))
-            return numbers.charAt(2);
+    private String getCustomDelimiterIfExists(String numbers){
+        if(numbers.startsWith("//["))
+            return numbers.substring(numbers.indexOf("[")+1,numbers.indexOf("]"));
+        else if(numbers.startsWith("//"))
+            return numbers.charAt(2)+"";
         return null;
     }
 
@@ -32,16 +34,16 @@ public class StringCalculator {
         return numbers.substring(numbers.indexOf("\n")+1);
     }
 
-    String buildRegex(Character delimiter){
-        return "[,\n]" + "|" + Pattern.quote(String.valueOf(delimiter));
+    String buildRegex(String delimiter){
+        return "[,\n]" + "|" + Pattern.quote(delimiter);
     }
 
     public int add(String numbers) {
         if(numbers == null || numbers.isEmpty())
             return 0;
 
-        Character delimiter = getCustomDelimiterIfExists(numbers);
-        if(delimiter != null){
+        String delimiter = getCustomDelimiterIfExists(numbers);
+        if (delimiter != null && !delimiter.isEmpty()){
             numbers = extractNumberSection(numbers);
             String regex = buildRegex(delimiter);
             return sumNumbers(numbers.split(regex));
