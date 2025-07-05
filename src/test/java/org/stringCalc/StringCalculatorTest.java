@@ -102,4 +102,13 @@ class StringCalculatorTest {
         assertEquals(10, stringCalculator.add("//[+][@]\n1+2@3+4"));
         assertEquals(20, stringCalculator.add("//[+][@]\n1+2@3+4,2\n8"));
     }
+
+    //9. make sure you can also handle multiple delimiters with length longer than one char
+    @Test
+    void shouldHandleMultipleDelimitersWithLengthGreaterThanOne() {
+        assertEquals(6, stringCalculator.add("//[**][%%]\n1**2%%3"));
+        assertEquals(6, stringCalculator.add("//[++][@@]\n1++2@@3"));
+        assertEquals(11, stringCalculator.add("//[**][%%]\n1**2%%3,4\n1"));
+        assertEquals(15, stringCalculator.add("//[**][%%%][@]\n1**2%%%3@4"));
+    }
 }
