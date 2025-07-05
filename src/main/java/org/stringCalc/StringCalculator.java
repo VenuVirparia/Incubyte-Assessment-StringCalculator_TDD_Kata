@@ -21,12 +21,25 @@ public class StringCalculator {
         return sum;
     }
 
-    private String getCustomDelimiterIfExists(String numbers){
-        if(numbers.startsWith("//["))
-            return numbers.substring(numbers.indexOf("[")+1,numbers.indexOf("]"));
-        else if(numbers.startsWith("//"))
-            return numbers.charAt(2)+"";
-        return null;
+    private List<String> getCustomDelimitersIfExists(String numbers) {
+        List<String> delimiters = new ArrayList<>();
+
+        if (numbers.startsWith("//[")) {
+            int start = numbers.indexOf("//") + 2;
+            int end = numbers.indexOf("\n");
+            String delimiterSection = numbers.substring(start, end);
+
+            while (delimiterSection.contains("[")) {
+                int open = delimiterSection.indexOf("[");
+                int close = delimiterSection.indexOf("]");
+                delimiters.add(delimiterSection.substring(open + 1, close));
+                delimiterSection = delimiterSection.substring(close + 1);
+            }
+        } else if (numbers.startsWith("//")) {
+            delimiters.add(numbers.charAt(2) + "");
+        }
+
+        return delimiters;
     }
 
     String extractNumberSection(String numbers)
@@ -34,18 +47,25 @@ public class StringCalculator {
         return numbers.substring(numbers.indexOf("\n")+1);
     }
 
-    String buildRegex(String delimiter){
-        return "[,\n]" + "|" + Pattern.quote(delimiter);
+    String buildRegex(List<String> delimiters) {
+        delimiters.add(",");
+        delimiters.add("\n");
+        List<String> quoted = new ArrayList<>();
+        for (String d : delimiters) {
+            quoted.add(Pattern.quote(d));
+        }
+        return String.join("|", quoted);
     }
 
     public int add(String numbers) {
-        if(numbers == null || numbers.isEmpty())
+        if (numbers == null || numbers.isEmpty())
             return 0;
 
-        String delimiter = getCustomDelimiterIfExists(numbers);
-        if (delimiter != null && !delimiter.isEmpty()){
+        List<String> delimiters = getCustomDelimitersIfExists(numbers);
+
+        if (!delimiters.isEmpty()) {
             numbers = extractNumberSection(numbers);
-            String regex = buildRegex(delimiter);
+            String regex = buildRegex(delimiters);
             return sumNumbers(numbers.split(regex));
         }
 
